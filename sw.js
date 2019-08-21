@@ -1,7 +1,7 @@
 const CACHE_NAME_STYLE = 'test-css-v2';
 const CACHE_NAME_SCRIPT = 'test-js-v2';
 const CACHE_NAME_IMAGE = 'test-img-v2';
-const CACHE_NAME_DOCUMENT = 'test-route-v1';
+const CACHE_NAME_DOCUMENT = 'test-route-v2';
 const CACHE_NAME_FONT = 'test-font-v1';
 const CACHE_NAME_DATA = 'test-data-v1';
 const cacheNames = {
@@ -18,9 +18,18 @@ const prefetchDocuments = ['/profile']
 
 var cacheWhitelist = Object.keys(cacheNames).map(key => cacheNames[key]);
 
+// var appRequest = new Request('/profile', { credentials: 'include' });
+
 self.addEventListener('install', event => {
   self.skipWaiting();
   console.log('installing…');
+  // event.waitUntil(
+  //   self.skipWaiting().then(function() {
+  //       caches.open(CACHE_NAME_DOCUMENT).then(function(cache) {
+  //           return cache.addAll([appRequest]);
+  //       })
+  //   })
+// );
 });
 
 self.addEventListener('activate', function (event) {
@@ -49,7 +58,7 @@ self.addEventListener('fetch', function (event) {
   const prefetchDocumentPointer = prefetchDocuments.includes(pathname) && 'document'
   // console.log('url', requestURL);
   // console.log('destination', destination)
-  console.log('pathname', pathname)
+  // console.log('pathname', pathname)
   // console.log('dataPointer', dataPointer)
 
   event.respondWith(
