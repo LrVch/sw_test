@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible"
+        content="ie=edge">
+  <title>SW</title>
+  <!-- <link  rel="stylesheet" crossorigin href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap"> -->
+  <link rel="stylesheet"
+        href="/styles/fonts.css">
+  <link rel="stylesheet"
+        href="/styles/app.css">
+  <link rel="stylesheet"
+        href="/styles/content.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Profile</h1>
+    <p class="content">User info</p>
+    <div>
+      <a href="/">home</a>
+    </div>
+    <br>
+    <div class="profile">
+      <img class="content-img"
+           src="/images/avatar.svg"
+           alt="avatar">
+      <div id="user-info"></div>
+    </div>
+
+    <ul id="posts">loading...</ul>
+  </div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/sw.js').then(function (registration) {
+          // Registration was successful
+          // console.log('ServiceWorker registration successful with scope: ', registration);
+        }, function (err) {
+          // registration failed :(
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      });
+    }
+  </script>
+
+  <script src="/scripts/app.js"></script>
+  <script src="/scripts/content.js"></script>
+  <script src="/scripts/resource.js"></script>
+</body>
+
+</html>

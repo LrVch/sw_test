@@ -1,0 +1,17 @@
+.content {
+  color: white;
+  background: blue;
+}
+
+.content-img {
+  width: 100px;
+  border-radius: 100%;
+}
+
+.profile {
+  display: flex;
+}
+
+.profile .content-img  {
+  margin-right: 30px;
+}
