@@ -13,13 +13,6 @@ const cacheNames = {
   data: CACHE_NAME_DATA
 };
 
-const  image = '<svg role="img" aria-labelledby="offline-title"'
-    + ' viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">'
-    + '<title id="offline-title">Offline</title>'
-    + '<g fill="none" fill-rule="evenodd"><path fill="#D8D8D8" d="M0 0h400v300H0z"/>'
-    + '<text fill="#9B9B9B" font-family="Times New Roman,Times,serif" font-size="72" font-weight="bold">'
-    + '<tspan x="93" y="172">offline</tspan></text></g></svg>',
-
 const dataCachePaths = ['/todos', '/posts', '/data/user.json']
 const prefetchDocuments = ['/profile', '/']
 
@@ -54,9 +47,9 @@ self.addEventListener('fetch', function (event) {
   const pathname = requestURL.pathname;
   const dataPointer = dataCachePaths.includes(pathname) && 'data';
   const prefetchDocumentPointer = prefetchDocuments.includes(pathname) && 'document';
-  const acceptHeader = request.headers.get('Accept');
-  const isImage = acceptHeader.indexOf('image') !== -1;
-  // console.log('destination', destination)
+  // const acceptHeader = event.request.headers.get('Accept');
+  // const isImage = acceptHeader.indexOf('image') !== -1;
+  // console.log('isImage', isImage)
   // console.log('pathname', pathname)
   // console.log('dataPointer', dataPointer)
 
@@ -80,17 +73,11 @@ self.addEventListener('fetch', function (event) {
             // console.log('values', ...response.headers.values());
             // console.log('keys', ...response.headers.keys());
             // console.log('entries', ...response.headers.entries());
-            
+
             // console.log('response', response);
 
             if (!response || response.status !== 200) {
               return response;
-            }
-
-            if (isImage) {
-              return new Response(image,
-                { headers: { 'Content-Type': 'image/svg+xml' } }
-              );
             }
 
             if (response.type === 'basic') {
