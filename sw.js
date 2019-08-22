@@ -1,5 +1,5 @@
 const CACHE_NAME_STYLE = 'test-css-v2';
-const CACHE_NAME_SCRIPT = 'test-js-v2';
+const CACHE_NAME_SCRIPT = 'test-js-v1';
 const CACHE_NAME_IMAGE = 'test-img-v2';
 const CACHE_NAME_DOCUMENT = 'test-route-v2';
 const CACHE_NAME_FONT = 'test-font-v1';
@@ -14,22 +14,13 @@ const cacheNames = {
 };
 
 const dataCachePaths = ['/todos', '/posts', '/data/user.json']
-const prefetchDocuments = ['/profile']
+const prefetchDocuments = ['/profile', '/']
 
 var cacheWhitelist = Object.keys(cacheNames).map(key => cacheNames[key]);
-
-// var appRequest = new Request('/profile', { credentials: 'include' });
 
 self.addEventListener('install', event => {
   self.skipWaiting();
   console.log('installing…');
-  // event.waitUntil(
-  //   self.skipWaiting().then(function() {
-  //       caches.open(CACHE_NAME_DOCUMENT).then(function(cache) {
-  //           return cache.addAll([appRequest]);
-  //       })
-  //   })
-// );
 });
 
 self.addEventListener('activate', function (event) {
@@ -49,14 +40,13 @@ self.addEventListener('activate', function (event) {
 });
 
 self.addEventListener('fetch', function (event) {
-  // console.log('[fetch event for assets]', event.request)
+  // console.log('[fetch event for assets]', event.request);
   const isOnline = navigator.onLine;
   const requestURL = new URL(event.request.url);
   const destination = event.request.destination;
   const pathname = requestURL.pathname;
   const dataPointer = dataCachePaths.includes(pathname) && 'data';
-  const prefetchDocumentPointer = prefetchDocuments.includes(pathname) && 'document'
-  // console.log('url', requestURL);
+  const prefetchDocumentPointer = prefetchDocuments.includes(pathname) && 'document';
   // console.log('destination', destination)
   // console.log('pathname', pathname)
   // console.log('dataPointer', dataPointer)
